@@ -2,13 +2,13 @@ import React from 'react';
 import './global.css';
 
 import Header from './components/Header';
+import Main from './pages/main';
 
 function App() {
   return (
     <div className="App">
-      <Header>
-        
-      </Header>
+      <Header />
+      <Main />
     </div>
   );
 }
