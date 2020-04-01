@@ -1,9 +1,14 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import api from '../../services/api';
 
+import './styles.css';
 
 export default class Main extends Component {
     
+    state = {
+        products: []
+    };
+
     //quando o componente for exebido em tela
     componentDidMount() {
         this.loadProducts();
@@ -12,10 +17,27 @@ export default class Main extends Component {
     loadProducts = async () => {
         const response = await api.get(`/products`);
 
-        console.log(response.data.docs);
+        this.setState({
+            products: response.data.docs,
+        });
     };
     
     render(){
-        return <h1>Hello World</h1>
+
+        const {products} = this.state;
+
+        return (
+            <div className="product-list">
+                {products.map( product => (
+                    <article key={product._id}>
+                        <strong>{product.title}</strong>
+                        <p> {product.description} </p>
+
+
+                        <a href="">Acessar</a>
+                    </article>
+                ))}
+            </div>
+        );
     }
 }
